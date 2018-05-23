@@ -14,11 +14,8 @@ body {
     position: relative;
     height: 640px;
     width: 480px;
-    background-color: lightcoral;
     border-radius: 4px;
     overflow: hidden;
-   
-    
 }
 
 .inner-form-container {
@@ -30,12 +27,11 @@ body {
 }
 
 .form-container {
-    background-image: linear-gradient(to right bottom, rgb(85, 197, 122),rgb(126, 213, 111));
+    background-image: linear-gradient(to right bottom, rgb(85, 197, 122), rgb(126, 213, 111));
     height: 640px;
     width: 480px;
     display: flex;
     border-radius: 4px;
-   
 }
 
 .form {
@@ -46,7 +42,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    
 }
 
 .form-group {
@@ -65,7 +60,7 @@ body {
     border: none;
     border-radius: 3px;
     text-indent: 15px;
-    background-color: rgba(255, 255, 255,.80);
+    background-color: rgba(255, 255, 255, .80);
     color: #333;
     font-size: 16px;
 }
@@ -79,15 +74,20 @@ body {
     padding: 10px 25px 20px 25px;
     margin: 15px 0px 0px 10px;
     border: none;
-    background-color: rgba(255, 255, 255,.80);
+    background-color: rgba(255, 255, 255, .60);
     font-size: 16px;
     border-radius: 3px;
     color: #333;
-    
+    cursor: pointer;
+    outline: none;
 }
 
-.form-container{
-    background-image: linear-gradient(to right bottom, rgb(85, 197, 122),rgb(126, 213, 111));
+.form__btn:hover {
+    background-color: rgba(255, 255, 255, .80);
+}
+
+.form-container {
+    background-image: linear-gradient(to right bottom, rgb(85, 197, 122), rgb(126, 213, 111));
     height: 640px;
     width: 480px;
     display: flex;
@@ -104,9 +104,10 @@ body {
 .btn-prev {
     padding: 5px 10px;
     font-size: 14px;
-    background-color: rgba(255, 255, 255,.60);
+    background-color: rgba(255, 255, 255, .60);
     color: #333;
     border: none;
+    cursor: pointer;
 }
 
 .btn-prev:hover {
@@ -123,11 +124,51 @@ body {
 .btn-next {
     padding: 5px 10px;
     font-size: 14px;
-    background-color: rgba(255, 255, 255,.60);
+    background-color: rgba(255, 255, 255, .60);
     color: #333;
     border: none;
+    cursor: pointer;
 }
 
 .btn-next:hover {
     background-color: rgba(255, 255, 255, .80);
+}
+
+.bubbles-container {
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    background-color: transparent;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bubbles {
+    background-color: white;
+    height: 15px;
+    width: 15px;
+    display: block;
+    border-radius: 100px;
+    margin-right: 6px;
+    opacity: 0.30;
+    transition: opacity .1s ease-in;
+    cursor: pointer;
+}
+
+.bubbles:hover {
+    opacity: 0.65;
+}
+
+.bubbles.active {
+    opacity: 1;
+}
+
+.bubbles:last-of-type{
+    margin: 0;
 }
