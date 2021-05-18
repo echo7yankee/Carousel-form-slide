@@ -1,63 +1,69 @@
-var carousel = document.querySelector('.carousel');
-var innerContainer = document.querySelector('.inner-form-container');
-var formContainers = document.querySelectorAll('.form-container');
-var prev = document.querySelector('.btn-prev');
-var next = document.querySelector('.btn-next');
-var bubblesContainer = document.querySelector('.bubbles-container');
-var currentIteration = 0;
-var width = 480;
-var bubblesArr = [];
+const signup_switch = document.querySelector(".signup-btn");
+const login_switch = document.querySelector(".login-btn");
+const inner_form_container = document.querySelector(".inner-form-container");
+const signup_input_list = document.querySelectorAll(".sign-up-input");
+const login_input_list = document.querySelectorAll(".login-input")
+const signup_inputs = Array.from(signup_input_list);
+const login_inputs = Array.from(login_input_list);
+const signup_btn = document.querySelectorAll(".form__btn")[0];
+const login_btn = document.querySelectorAll(".form__btn")[1];
+const signup_form = document.querySelector(".signup-form");
+const login_form = document.querySelector(".login-form");
+const invalid_error_signup = document.querySelector(".invalid-error-signup");
+const invalid_error_login = document.querySelector(".invalid-error-login");
 
-for (var i = 0; i < formContainers.length; i++) {
-    var bubbles = document.createElement('span');
-    bubbles.classList.add('bubbles');
-    bubblesContainer.appendChild(bubbles);
-    bubblesArr.push(bubbles);
-    
+login_switch.addEventListener("click",()=>{
+    signup_switch.classList.remove("active-btn");
+    login_switch.classList.add("active-btn");
+    inner_form_container.style.left = "-100%";
+})
 
-    bubbles.addEventListener('click',function(){
+signup_switch.addEventListener("click",()=>{
+    login_switch.classList.remove("active-btn");
+    signup_switch.classList.add("active-btn");
+    inner_form_container.style.left = "0%";
+})
 
-        currentIteration = i;
-
-        if (currentIteration >= formContainers.length) {
-            currentIteration = i - 1;
-        } if (currentIteration > 0) {
-            currentIteration = 0;
-        }
-        console.log(currentIteration);
-        carouselSlide();
-    });
-
-}
-
-
-
-
-next.addEventListener('click', function () {
-    currentIteration++;
-    if (currentIteration >= formContainers.length) {
-        currentIteration = 0;
+signup_btn.addEventListener("click",(target)=>{
+    target.preventDefault();
+    var has_ivalid = signup_inputs.some((elm,idx,arr)=>{
+        return !(elm.checkValidity());
+    })
+    signup_inputs.forEach((elm,idx,arr)=>{
+        elm.classList.remove("invalid-input");
+    })
+    if(has_ivalid){
+        var invalid_inputs = signup_inputs.filter((elm,idx,arr)=>{
+            return !(elm.checkValidity());
+        })
+        invalid_inputs.forEach((elm,idx,arr)=>{
+            elm.classList.add("invalid-input");
+        })
+        invalid_error_signup.style.display = "block";
     }
-    carouselSlide();
-});
-
-prev.addEventListener('click', function () {
-    currentIteration--;
-    if (currentIteration < 0) {
-        currentIteration = formContainers.length - 1;
+    else{
+        signup_form.submit();
     }
-    carouselSlide();
-});
+})
 
-function carouselSlide() {
-    innerContainer.style.left = -width * currentIteration + 'px';
-    bubblesArr.forEach(function(bubbles,i){
-
-        if (i === currentIteration) {
-            bubbles.classList.add('active');
-        } else {
-            bubbles.classList.remove('active');
-        }
-    });
-}
-carouselSlide();
+login_btn.addEventListener("click",(target)=>{
+    target.preventDefault();
+    var has_ivalid = login_inputs.some((elm,idx,arr)=>{
+        return !(elm.checkValidity());
+    })
+    login_inputs.forEach((elm,idx,arr)=>{
+        elm.classList.remove("invalid-input");
+    })
+    if(has_ivalid){
+        var invalid_inputs = login_inputs.filter((elm,idx,arr)=>{
+            return !(elm.checkValidity());
+        })
+        invalid_inputs.forEach((elm,idx,arr)=>{
+            elm.classList.add("invalid-input");
+        })
+        invalid_error_login.style.display = "block";
+    }
+    else{
+        login_form.submit();
+    }
+})
